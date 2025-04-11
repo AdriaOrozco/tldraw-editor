@@ -1,9 +1,11 @@
+"use client";
+import { Tldraw } from "tldraw";
+import "tldraw/tldraw.css";
+
 export default function Home() {
   return (
-    <section className="py-24">
-      <div className="container">
-        <h1 className="text-3xl font-bold">Tldraw Editor home</h1>
-      </div>
-    </section>
+    <div className="fixed inset-0">
+      <Tldraw persistenceKey="example" />
+    </div>
   );
 }
