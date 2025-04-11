@@ -6,6 +6,7 @@ import { useToolbar } from "../hooks/useToolbar";
 export default function Editor() {
   const { customTools, uiOverrides, components, customAssetUrls } =
     useToolbar();
+
   return (
     <div className="fixed inset-0">
       <Tldraw

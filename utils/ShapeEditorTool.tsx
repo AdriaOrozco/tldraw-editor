@@ -1,7 +1,6 @@
-import { StateNode, TLTextShape, toRichText } from "tldraw";
-import { SHAPE_EDITOR_TOOL_ID } from "../constants/toolsConstants";
+import { StateNode, TLPointerEventInfo } from "tldraw";
+import { GEO_TYPES, SHAPE_EDITOR_TOOL_ID } from "../constants/toolsConstants";
 
-const OFFSET = 12;
 //We extend the `StateNode` class to create a new tool called `ShapeEditorTool`.
 export class ShapeEditorTool extends StateNode {
   static override id = SHAPE_EDITOR_TOOL_ID;
@@ -10,15 +9,40 @@ export class ShapeEditorTool extends StateNode {
   override onEnter() {
     this.editor.setCursor({ type: "default", rotation: 0 });
   }
+
   //The onPointerDown method is called when the user clicks on the canvas.
-  //At the moment, it creates a new text shape at the current page point.
-  override onPointerDown() {
-    const { currentPagePoint } = this.editor.inputs;
-    this.editor.createShape<TLTextShape>({
-      type: "text",
-      x: currentPagePoint.x - OFFSET,
-      y: currentPagePoint.y - OFFSET,
-      props: { richText: toRichText("TEST") }
-    });
+  override onPointerDown(info: TLPointerEventInfo) {
+    //get all shapes on the current page
+    const shapes = this.editor.getCurrentPageShapes();
+
+    for (const shape of shapes) {
+      //get the bounds of the shape
+      const bounds = this.editor.getShapePageBounds(shape.id);
+      //get the geometry of the shape
+      const geometry = this.editor.getShapeGeometry(shape);
+      //convert the point to the shape's local space
+      const localPoint = this.editor.getPointInShapeSpace(shape, info.point);
+
+      //check if the click is just in the shape's line or if the click is inside the shape
+      if (
+        geometry.hitTestPoint(localPoint, 2) ||
+        bounds?.containsPoint(info.point)
+      ) {
+        //@ts-expect-error geo is an attribute of the shape.props object
+        const currentIndex = GEO_TYPES.indexOf(shape.props.geo);
+        const nextIndex = (currentIndex + 1) % GEO_TYPES.length;
+        const nextGeoForm = GEO_TYPES[nextIndex];
+        //Modify the shape's geometry
+        this.editor.updateShape({
+          id: shape.id,
+          type: shape.type,
+          props: {
+            ...shape.props,
+            geo: nextGeoForm
+          }
+        });
+        break;
+      }
+    }
   }
 }
