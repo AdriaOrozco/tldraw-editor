@@ -1,11 +1,6 @@
-"use client";
-import { Tldraw } from "tldraw";
+import Editor from "@/components/Editor";
 import "tldraw/tldraw.css";
 
 export default function Home() {
-  return (
-    <div className="fixed inset-0">
-      <Tldraw persistenceKey="example" />
-    </div>
-  );
+  return <Editor />;
 }
