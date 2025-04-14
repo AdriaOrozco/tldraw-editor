@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar loadedSnapshot={json.snapshot} />
       <Editor loadedSnapshot={json.snapshot} />
     </SidebarProvider>
   );
