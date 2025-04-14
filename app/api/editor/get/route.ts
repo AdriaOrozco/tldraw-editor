@@ -10,6 +10,13 @@ export async function GET() {
     const result = await createCaller.getSnapshot(); // tRPC Endpointto get snapshot
     return NextResponse.json(result);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch snapshot " + error });
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Failed to fetch snapshot",
+        message: error
+      },
+      { status: 500 }
+    );
   }
 }
