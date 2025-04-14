@@ -32,7 +32,6 @@ export class ShapeEditorTool extends StateNode {
         geometry.hitTestPoint(localPoint, 2) ||
         bounds?.containsPoint(pagePoint)
       ) {
-        console.log("Shape clicked:", shape);
         //@ts-expect-error all shapes have the geo pror except the text
         if (shape.props.geo) {
           //@ts-expect-error all shapes have the geo pror except the text
