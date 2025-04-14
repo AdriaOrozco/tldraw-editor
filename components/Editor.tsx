@@ -8,7 +8,7 @@ export default function Editor() {
     useToolbar();
 
   return (
-    <div className="fixed inset-0">
+    <div className="h-screen w-full md:w-[calc(100vw-255px)]">
       <Tldraw
         //Custom tool classes
         tools={customTools}
