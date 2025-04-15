@@ -1,6 +1,7 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import Editor from "@/components/Editor";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { LayoutProvider } from "@/context/layoutProvider";
 import "tldraw/tldraw.css";
 
 export default async function Home() {
@@ -9,8 +10,10 @@ export default async function Home() {
 
   return (
     <SidebarProvider>
-      <AppSidebar loadedSnapshot={json.snapshot} />
-      <Editor loadedSnapshot={json.snapshot} />
+      <LayoutProvider>
+        <AppSidebar />
+        <Editor loadedSnapshot={json.snapshot} />
+      </LayoutProvider>
     </SidebarProvider>
   );
 }

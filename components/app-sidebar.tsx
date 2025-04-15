@@ -1,3 +1,4 @@
+"use client";
 import {
   Sidebar,
   SidebarContent,
@@ -10,24 +11,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from "@/components/ui/sidebar";
+import { useContext } from "react";
+import { layoutContext } from "@/context/layoutContext";
 
-import { TLEditorSnapshot } from "tldraw";
-import { useMemo } from "react";
-
-export function AppSidebar({
-  loadedSnapshot
-}: {
-  loadedSnapshot: TLEditorSnapshot | undefined;
-}) {
-  const shapes = useMemo(() => {
-    if (!loadedSnapshot) return [];
-    return Object.entries(loadedSnapshot.document.store)
-      .filter(([key]) => key.startsWith("shape:"))
-      .map(([, shape]) => {
-        return shape;
-      });
-  }, [loadedSnapshot]);
-  console.log(shapes);
+export function AppSidebar() {
+  const { shapes } = useContext(layoutContext);
 
   return (
     <Sidebar>
@@ -46,14 +34,7 @@ export function AppSidebar({
                   <SidebarMenuButton asChild>
                     <span>
                       <span>
-                        {
-                          //@ts-expect-error show geo on shapes
-                          item.props.geo ?
-                            //@ts-expect-error show geo on shapes
-                            item.props.geo
-                            //@ts-expect-error show type on shapes
-                          : item.type
-                        }
+                        {item.props?.geo ? item.props.geo : item.type}
                       </span>
                     </span>
                   </SidebarMenuButton>

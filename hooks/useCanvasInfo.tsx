@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { layoutContext } from "@/context/layoutContext";
+import { useContext, useEffect } from "react";
 import { TLEditorSnapshot, useEditor } from "tldraw";
 
 export const useCanvasInfo = () => {
   function AutoSave() {
     const editor = useEditor();
+    const { saveShapes } = useContext(layoutContext);
 
     useEffect(() => {
       //to avoid unnecessary renders we use the editor store to listen to changes
@@ -11,12 +13,14 @@ export const useCanvasInfo = () => {
         () => {
           const snapshot = editor.getSnapshot();
           saveSnapshotToAPI(snapshot);
+          //Saving shapes in context to be used in the sidebar
+          saveShapes(snapshot);
         },
         { source: "user" }
       );
       //Clean up function on unmount or when the editor changes
       return () => unsubscribe();
-    }, [editor]);
+    }, [editor, saveShapes]);
 
     return null;
   }
