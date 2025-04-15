@@ -72,23 +72,22 @@ The project is organized into the following folders and files:
     application. For example, `app/page.tsx` would correspond to the root (`/`)
     of the site.
 
-    - **`layout.tsx`**: Defines the layout for the corresponding route.
+  - **`layout.tsx`**: Defines the layout for the corresponding route.
 
-    - **`error.tsx`** or **`error.js`**: Handles error boundaries for specific
-      routes, allowing you to display custom error pages when something goes
-      wrong in that part of the application.
+  - **`error.tsx`** or **`error.js`**: Handles error boundaries for specific
+    routes, allowing you to display custom error pages when something goes wrong
+    in that part of the application.
 
-    - **`loading.tsx`**: Used to display loading states when data is being
-      fetched or the page is in the process of rendering.
+  - **`loading.tsx`**: Used to display loading states when data is being fetched
+    or the page is in the process of rendering.
 
-    - **`api/editor`**: This folder contains Next.js built-in API routes to
-      handle server-side requests. Next.js allows you to define API routes
-      within the `app/api` directory. Each file in this folder defines a
-      specific API endpoint for handling HTTP requests such as `GET`, `POST`,
-      etc.
+  - **`api/editor`**: This folder contains Next.js built-in API routes to handle
+    server-side requests. Next.js allows you to define API routes within the
+    `app/api` directory. Each file in this folder defines a specific API
+    endpoint for handling HTTP requests such as `GET`, `POST`, etc.
 
-    - **`api/trpc/`**: This folder contains files for **tRPC** setup and
-      procedures, ensuring that the requests are type-safe.
+  - **`api/trpc/`**: This folder contains files for **tRPC** setup and
+    procedures, ensuring that the requests are type-safe.
 
 - **/assets**: Contains images, icons, and other static files used throughout
   the app.
