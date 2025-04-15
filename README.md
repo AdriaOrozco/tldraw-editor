@@ -74,9 +74,9 @@ The project is organized into the following folders and files:
 
   - **`layout.tsx`**: Defines the layout for the corresponding route.
 
-  - **`error.tsx`** or **`error.js`**: Handles error boundaries for specific
-    routes, allowing you to display custom error pages when something goes wrong
-    in that part of the application.
+  - **`error.tsx`**: Handles error boundaries for specific routes, allowing you
+    to display custom error pages when something goes wrong in that part of the
+    application.
 
   - **`loading.tsx`**: Used to display loading states when data is being fetched
     or the page is in the process of rendering.
