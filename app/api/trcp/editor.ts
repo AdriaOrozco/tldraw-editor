@@ -31,6 +31,7 @@ type Snapshot = z.infer<typeof SnapshotSchema>;
 export const editorRouter = router({
   getSnapshot: publicProcedure.query(
     async (): Promise<
+      | { success: true; snapshot: undefined }
       | { success: true; snapshot: Snapshot }
       | { success: false; message: string }
     > => {
@@ -40,7 +41,7 @@ export const editorRouter = router({
 
         //check if the file exists
         if (!fs.existsSync(filePath)) {
-          throw new Error("Archivo de snapshot no encontrado");
+          return { success: true, snapshot: undefined };
         }
 
         //load the file
