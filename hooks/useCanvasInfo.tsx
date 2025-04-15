@@ -1,23 +1,31 @@
 import { layoutContext } from "@/context/layoutContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { TLEditorSnapshot, useEditor } from "tldraw";
 
 export const useCanvasInfo = () => {
   function AutoSave() {
     const editor = useEditor();
     const { saveShapes } = useContext(layoutContext);
+    const prevSnapshotRef = useRef<string | null>(null);
 
     useEffect(() => {
-      //to avoid unnecessary renders we use the editor store to listen to changes
-      const unsubscribe = editor.store.listen(
-        () => {
-          const snapshot = editor.getSnapshot();
+      const saveIfChanged = () => {
+        const snapshot = editor.getSnapshot();
+        //To compare changes
+        const snapshotString = JSON.stringify(snapshot);
+
+        //Compare the current snapshot with the previous one to see if it has actually changed
+        if (prevSnapshotRef.current !== snapshotString) {
+          prevSnapshotRef.current = snapshotString;
           saveSnapshotToAPI(snapshot);
-          //Saving shapes in context to be used in the sidebar
           saveShapes(snapshot);
-        },
-        { source: "user" }
-      );
+        }
+      };
+      //to avoid unnecessary renders we use the editor store to listen to changes
+      const unsubscribe = editor.store.listen(saveIfChanged, {
+        source: "user"
+      });
+
       //Clean up function on unmount or when the editor changes
       return () => unsubscribe();
     }, [editor, saveShapes]);
@@ -31,10 +39,14 @@ export const useCanvasInfo = () => {
     loadedSnapshot: TLEditorSnapshot | undefined;
   }) {
     const editor = useEditor();
+    const { saveShapes } = useContext(layoutContext);
+
     useEffect(() => {
       if (loadedSnapshot) {
         try {
           editor.loadSnapshot(loadedSnapshot);
+          // Save the loaded snapshot to the context
+          saveShapes(loadedSnapshot);
         } catch (e) {
           console.error("Error loading snapshot:", e);
         }

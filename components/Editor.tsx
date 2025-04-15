@@ -12,6 +12,7 @@ export default function Editor({
   const { customTools, uiOverrides, components, customAssetUrls } =
     useToolbar();
   const { AutoSave, AutoLoad, EditorInstance } = useCanvasInfo();
+
   return (
     <div className="h-screen w-full md:w-[calc(100vw-255px)]">
       <Tldraw

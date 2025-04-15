@@ -25,6 +25,7 @@ import { changeShape } from "@/utils/functions";
 
 export function AppSidebar() {
   const { shapes, editor } = useContext(layoutContext);
+
   return (
     <Sidebar>
       <SidebarHeader>
