@@ -13,8 +13,8 @@ export async function GET() {
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to fetch snapshot",
-        message: error
+        error: error,
+        message: "Failed to fetch snapshot"
       },
       { status: 500 }
     );

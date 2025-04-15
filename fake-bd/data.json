@@ -2,8 +2,8 @@
   "document": {
     "store": {
       "shape:Nhs5pcohtJX7iWP4MIHIM": {
-        "x": 111.30175442944847,
-        "y": 967.9265493000447,
+        "x": 352.5745173639275,
+        "y": 572.9941979107364,
         "rotation": 0,
         "isLocked": false,
         "opacity": 1,
@@ -113,8 +113,8 @@
         "typeName": "shape"
       },
       "shape:Mv9twB-v5RkpgBhW6l5bX": {
-        "x": 967.1842300670378,
-        "y": 178.82083610093463,
+        "x": 1111.2060829179436,
+        "y": 141.98836065770803,
         "rotation": 0,
         "isLocked": false,
         "opacity": 1,
@@ -213,9 +213,7 @@
           "y": 580.5410779163782,
           "z": 0.27277219027774086
         },
-        "selectedShapeIds": [
-          "shape:Nhs5pcohtJX7iWP4MIHIM"
-        ],
+        "selectedShapeIds": [],
         "focusedGroupId": null
       }
     ]
