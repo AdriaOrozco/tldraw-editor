@@ -40,7 +40,7 @@ To add a button that modifies a shape, two different approaches were chosen:
     1.1. Creates a shape on the canvas (Square, Rectangle, Triangle, etc.)
 
     1.2. Click on the new toolbar icon
-    ![Edit shape icon](assets/shape-edit-icon.svg)
+    <img src="assets/shape-edit-icon.svg" alt="Edit shape icon" width="24" height="24" />
 
     1.3. With the tool selected, click as many times as needed on the created
     shape to change its form.
@@ -56,6 +56,11 @@ To add a button that modifies a shape, two different approaches were chosen:
 
 **Note:** Text or manually drawn shapes cannot be modified in shape using these
 tools.
+
+**Loading Feedback**  
+A deliberate 1-second delay has been added to the editor fetch request to ensure
+the loading component is briefly visible, letting users know the app is
+working.".
 
 ## Project Structure
 
