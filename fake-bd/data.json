@@ -13,7 +13,7 @@
         "props": {
           "w": 396.8226650590227,
           "h": 312.2168077811913,
-          "geo": "hexagon",
+          "geo": "arrow-right",
           "color": "black",
           "labelColor": "black",
           "fill": "none",
@@ -50,7 +50,7 @@
         "props": {
           "w": 271.9760395092371,
           "h": 240.38488833203746,
-          "geo": "hexagon",
+          "geo": "star",
           "color": "black",
           "labelColor": "black",
           "fill": "none",
@@ -75,6 +75,43 @@
         "index": "a37ii",
         "typeName": "shape"
       },
+      "shape:0Ty-SJQ97xpa0fcUoBu-B": {
+        "x": -193.85501820652098,
+        "y": -304.06838316251697,
+        "rotation": 0,
+        "isLocked": false,
+        "opacity": 1,
+        "meta": {},
+        "id": "shape:0Ty-SJQ97xpa0fcUoBu-B",
+        "type": "geo",
+        "props": {
+          "w": 419.8501224900913,
+          "h": 208.53596710896755,
+          "geo": "arrow-up",
+          "color": "black",
+          "labelColor": "black",
+          "fill": "none",
+          "dash": "draw",
+          "size": "m",
+          "font": "draw",
+          "align": "middle",
+          "verticalAlign": "middle",
+          "growY": 0,
+          "url": "",
+          "scale": 1,
+          "richText": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph"
+              }
+            ]
+          }
+        },
+        "parentId": "page:page",
+        "index": "a54PO",
+        "typeName": "shape"
+      },
       "shape:AXcyTH-WdP0zk6PvXAgv5": {
         "x": 351.40625,
         "y": 233.32421875,
@@ -87,7 +124,7 @@
         "props": {
           "w": 379.296875,
           "h": 206.0390625,
-          "geo": "arrow-up",
+          "geo": "arrow-down",
           "color": "black",
           "labelColor": "black",
           "fill": "none",
@@ -124,7 +161,7 @@
         "props": {
           "w": 310.9279575518408,
           "h": 248.2611952891815,
-          "geo": "ellipse",
+          "geo": "pentagon",
           "color": "black",
           "labelColor": "black",
           "fill": "none",

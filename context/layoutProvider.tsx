@@ -2,7 +2,7 @@
 import { FC, useReducer } from "react";
 import { layoutContext } from "./layoutContext";
 import { layoutReducer } from "./layoutReducer";
-import { TLEditorSnapshot, TLRecord } from "tldraw";
+import { Editor, TLEditorSnapshot, TLRecord } from "tldraw";
 
 export type MyExtendedRecord = TLRecord & {
   props?: {
@@ -13,10 +13,12 @@ export type MyExtendedRecord = TLRecord & {
 
 export type LayoutState = {
   shapes: MyExtendedRecord[];
+  editor: Editor | null;
 };
 
 const LAYOUT_INITIAL_STATE: LayoutState = {
-  shapes: []
+  shapes: [],
+  editor: null
 };
 
 type ContentProps = {
@@ -37,11 +39,16 @@ export const LayoutProvider: FC<ContentProps> = ({
     dispatch({ type: "UI - Save Shapes", payload: shapes });
   };
 
+  const saveEditorInstance = (editor: Editor) => {
+    dispatch({ type: "UI - Save Editor", payload: editor });
+  };
+
   return (
     <layoutContext.Provider
       value={{
         ...state,
         shapes: state.shapes,
+        saveEditorInstance,
         saveShapes
       }}
     >

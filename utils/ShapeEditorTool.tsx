@@ -1,5 +1,6 @@
 import { StateNode, TLPointerEventInfo } from "tldraw";
-import { GEO_TYPES, SHAPE_EDITOR_TOOL_ID } from "../constants/toolsConstants";
+import { SHAPE_EDITOR_TOOL_ID } from "../constants/toolsConstants";
+import { changeShape } from "./functions";
 
 //We extend the `StateNode` class to create a new tool called `ShapeEditorTool`.
 export class ShapeEditorTool extends StateNode {
@@ -15,7 +16,6 @@ export class ShapeEditorTool extends StateNode {
     //get all shapes on the current page
 
     const shapes = this.editor.getCurrentPageShapes();
-
     //Cause of the sidebar width we have to move the point to the left
     for (const shape of shapes) {
       //Click point to canvas coordinates
@@ -32,22 +32,8 @@ export class ShapeEditorTool extends StateNode {
         geometry.hitTestPoint(localPoint, 2) ||
         bounds?.containsPoint(pagePoint)
       ) {
-        //@ts-expect-error all shapes have the geo pror except the text
-        if (shape.props.geo) {
-          //@ts-expect-error all shapes have the geo pror except the text
-          const currentIndex = GEO_TYPES.indexOf(shape.props.geo);
-          console.log("currentIndex", currentIndex);
-          const nextIndex = (currentIndex + 1) % GEO_TYPES.length;
-          const nextGeoForm = GEO_TYPES[nextIndex];
-          //Modify the shape's geometry
-          this.editor.updateShape({
-            id: shape.id,
-            type: shape.type,
-            props: {
-              ...shape.props,
-              geo: nextGeoForm
-            }
-          });
+        const result = changeShape(this.editor, shape);
+        if (result) {
           break;
         }
       }

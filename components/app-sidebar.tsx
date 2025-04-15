@@ -8,15 +8,23 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem
 } from "@/components/ui/sidebar";
 import { useContext } from "react";
 import { layoutContext } from "@/context/layoutContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
+import { changeShape } from "@/utils/functions";
 
 export function AppSidebar() {
-  const { shapes } = useContext(layoutContext);
-
+  const { shapes, editor } = useContext(layoutContext);
   return (
     <Sidebar>
       <SidebarHeader>
@@ -38,6 +46,24 @@ export function AppSidebar() {
                       </span>
                     </span>
                   </SidebarMenuButton>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <SidebarMenuAction>
+                        <MoreHorizontal />
+                      </SidebarMenuAction>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent side="right" align="start">
+                      <DropdownMenuItem
+                        onClick={() => {
+                          if (editor) {
+                            changeShape(editor, item);
+                          }
+                        }}
+                      >
+                        <span>Cambiar forma</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

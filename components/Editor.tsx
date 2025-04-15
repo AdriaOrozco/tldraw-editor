@@ -11,7 +11,7 @@ export default function Editor({
 }) {
   const { customTools, uiOverrides, components, customAssetUrls } =
     useToolbar();
-  const { AutoSave, AutoLoad } = useCanvasInfo();
+  const { AutoSave, AutoLoad, EditorInstance } = useCanvasInfo();
   return (
     <div className="h-screen w-full md:w-[calc(100vw-255px)]">
       <Tldraw
@@ -26,6 +26,7 @@ export default function Editor({
       >
         <AutoLoad loadedSnapshot={loadedSnapshot} />
         <AutoSave />
+        <EditorInstance />
       </Tldraw>
     </div>
   );

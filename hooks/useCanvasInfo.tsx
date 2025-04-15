@@ -24,23 +24,6 @@ export const useCanvasInfo = () => {
 
     return null;
   }
-  const saveSnapshotToAPI = async (snapshot: TLEditorSnapshot) => {
-    try {
-      const response = await fetch("/api/editor/post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(snapshot)
-      });
-
-      if (!response.ok) {
-        throw new Error("Error saving snapshot");
-      }
-    } catch (error) {
-      console.error("Error saving snapshot:", error);
-    }
-  };
 
   function AutoLoad({
     loadedSnapshot
@@ -63,8 +46,37 @@ export const useCanvasInfo = () => {
     return null;
   }
 
+  const saveSnapshotToAPI = async (snapshot: TLEditorSnapshot) => {
+    try {
+      const response = await fetch("/api/editor/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(snapshot)
+      });
+
+      if (!response.ok) {
+        throw new Error("Error saving snapshot");
+      }
+    } catch (error) {
+      console.error("Error saving snapshot:", error);
+    }
+  };
+
+  function EditorInstance() {
+    const editor = useEditor();
+    const { saveEditorInstance } = useContext(layoutContext);
+    useEffect(() => {
+      saveEditorInstance(editor);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [editor]);
+    return null;
+  }
+
   return {
     AutoSave,
-    AutoLoad
+    AutoLoad,
+    EditorInstance
   };
 };
