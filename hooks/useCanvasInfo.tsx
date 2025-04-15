@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef } from "react";
 import { TLEditorSnapshot, useEditor } from "tldraw";
 
 export const useCanvasInfo = () => {
+  //This hook is used to save the canvas information to the database.
   function AutoSave() {
     const editor = useEditor();
     const { saveShapes } = useContext(layoutContext);
@@ -33,6 +34,7 @@ export const useCanvasInfo = () => {
     return null;
   }
 
+  //This hook is used to load the canvas information from the database.
   function AutoLoad({
     loadedSnapshot
   }: {
@@ -58,6 +60,7 @@ export const useCanvasInfo = () => {
     return null;
   }
 
+  //Function to save the snapshot to the database
   const saveSnapshotToAPI = async (snapshot: TLEditorSnapshot) => {
     try {
       const response = await fetch("/api/editor/post", {
@@ -76,6 +79,7 @@ export const useCanvasInfo = () => {
     }
   };
 
+  //This hook is used to save the editor instance to the context
   function EditorInstance() {
     const editor = useEditor();
     const { saveEditorInstance } = useContext(layoutContext);
